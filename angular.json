@@ -20,7 +20,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./projects/gdg-lib/assets/svg/",
+                "output": "./assets/gdg-lib/"
+              }
             ],
             "styles": [
               "src/styles.css"
@@ -96,6 +101,40 @@
           }
         }
       }
+    },
+    "gdg-lib": {
+      "projectType": "library",
+      "root": "projects/gdg-lib",
+      "sourceRoot": "projects/gdg-lib/src",
+      "prefix": "gdg",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/gdg-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/gdg-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/gdg-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/gdg-lib/src/test.ts",
+            "tsConfig": "projects/gdg-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/gdg-lib/karma.conf.js"
+          }
+        }
+      }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
